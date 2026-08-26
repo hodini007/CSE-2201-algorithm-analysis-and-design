@@ -45,3 +45,16 @@ void merge_sort(vector<int>&arr,int l,int h)
         merge(arr,l,m,h);
     }
 }
+
+int main(){
+
+
+    vector<int> arr={214,35,64,24,53,5,7,75,53,43,5,7,64,5};
+    merge_sort(arr,0,arr.size()-1);
+    for (auto i : arr)
+    {
+        cout<<i<<' ';
+    }
+    
+
+}
