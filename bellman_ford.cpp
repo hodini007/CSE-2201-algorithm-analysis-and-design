@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Edge {

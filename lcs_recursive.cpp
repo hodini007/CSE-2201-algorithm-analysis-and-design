@@ -19,6 +19,25 @@ int main() {
         }
     }
 
-    cout << dp[m][n] << '\n';
+    string sequence;
+    int i = m;
+    int j = n;
+
+    while (i > 0 && j > 0) {
+        if (x[i - 1] == y[j - 1]) {
+            sequence += x[i - 1];
+            --i;
+            --j;
+        } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+            --i;
+        } else {
+            --j;
+        }
+    }
+
+    reverse(sequence.begin(), sequence.end());
+
+    cout << "Length: " << dp[m][n] << '\n';
+    cout << "Sequence: " << sequence << '\n';
     return 0;
 }

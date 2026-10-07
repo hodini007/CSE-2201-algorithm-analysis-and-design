@@ -31,5 +31,22 @@ int main(){
     }
 
     int ans = lcs(0, 0);
-    cout<<ans<<endl;
+    string sequence;
+    int i = 0;
+    int j = 0;
+
+    while (i < m && j < n) {
+        if (x[i] == y[j]) {
+            sequence += x[i];
+            ++i;
+            ++j;
+        } else if (lcs(i + 1, j) >= lcs(i, j + 1)) {
+            ++i;
+        } else {
+            ++j;
+        }
+    }
+
+    cout << "Length: " << ans << endl;
+    cout << "Sequence: " << sequence << endl;
 }
