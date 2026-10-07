@@ -3,28 +3,25 @@ using namespace std;
 vector<int> findLIS(const vector<int>& nums) {
     if (nums.empty()) return {};
 
-    vector<int> tailIndices;
+    int n = nums.size();
+    vector<int> dp(n, 1);
     vector<int> previous(nums.size(), -1);
+    int lastIndex = 0;
 
-    for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
-        auto it = lower_bound(
-            tailIndices.begin(), tailIndices.end(), nums[i],
-            [&nums](int index, int value) { return nums[index] < value; });
-        int position = it - tailIndices.begin();
-
-        if (position > 0) {
-            previous[i] = tailIndices[position - 1];
+    for (int i = 1; i < n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            if (nums[i] > nums[j] && dp[i] < dp[j] + 1) {
+                dp[i] = dp[j] + 1;
+                previous[i] = j;
+            }
         }
-
-        if (it == tailIndices.end()) {
-            tailIndices.push_back(i);
-        } else {
-            *it = i;
+        if (dp[i] > dp[lastIndex]) {
+            lastIndex = i;
         }
     }
 
     vector<int> sequence;
-    for (int index = tailIndices.back(); index != -1;
+    for (int index = lastIndex; index != -1;
          index = previous[index]) {
         sequence.push_back(nums[index]);
     }
